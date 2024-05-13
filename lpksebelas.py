@@ -1,7 +1,5 @@
 import streamlit as st
 
-from streamlit_option_menu import option_menu
-
 st.set_page_config(
     page_title="kelompoksebelas_lpk",
     page_icon="🤪",
@@ -13,7 +11,10 @@ st.write ('''
 Web ini dibuat untuk memudahkan kamu dalam mendapatkan informasi terkait indeks massa tubuh kamu sehingga kamu bisa mengetahui informasi mengenai kondisi tubuh saat ini, resiko yang mungkin terjadi dan kamu akan mendapatkan saran untuk mengatasi resikonya. Web ini juga dibuat untuk memudahkan kamu dalam mendapatkan informasi mengenai kadar gula darah kamu saat ini. 
 SELAMAT MENCOBA <3.
 ''')
-navbar = option_menu(menu_title=None, options=['Home', 'Kalkulator IMT', 'Cek Kadar Gula Darah',], icons=['0','0','0'])
+navbar = st.sidebar.selectbox(
+    "Menu",
+    ('Home', 'Kalkulator IMT', 'Cek Kadar Gula Darah'),
+)
 
 if navbar == 'Home' :
     st.title('Kalkulator IMT dan Cek Kadar Gula Darah')
@@ -27,17 +28,13 @@ if navbar == 'Home' :
 
 if navbar == 'Kalkulator IMT' :
     st.title('KALKULATOR INDEKS MASSA TUBUH')
-    col1, col2, col3 = st.columns(3)
-    with col2 :
-        st.image('rumusimt.jpg', width=500)
+    st.image('rumusimt.jpg')
     jenis_kelamin = st.selectbox('Pilih Jenis Kelamin', options=['Laki Laki', 'Perempuan'])
     nama = st.text_input('Masukkan nama anda')
     usia = st.number_input('Masukkan usia anda')
     tinggi = st.number_input('Masukkan tinggi anda (cm)')
     berat = st.number_input('Masukkan berat badan anda (kg)')
-    column1, column2, column3 = st.columns(3)
-    with column2 :
-        st.image('tabelimt.jpg', width=500)
+    st.image('tabelimt.jpg')
     if st.button('Hitung') :
         IMT = (berat)/((tinggi**2)/10000)
         if IMT <= 18.4 :
@@ -88,7 +85,7 @@ Program menurunkan berat badan ini harus dilakukkan bertahap dengan kondisi tubu
 if navbar == 'Cek Kadar Gula Darah' :
     st.title('CEK KADAR GULA DARAH')
     search = st.text_input('  ', placeholder='cari sesuai kata kunci')
-    st.image('keyword.jpg', width=500)
+    st.image('keyword.jpg')
     if st.button('CARI') :
         if search.lower() == 'anak usia dibawah 6 tahun' :
             col1, col2 = st.columns(2)
